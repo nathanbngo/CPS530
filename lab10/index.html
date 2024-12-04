@@ -1,39 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Lab 10: Flask Framework</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
+    <title>Lab 10: Hosting with Netlify</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            text-align: center;
+            margin: 0;
             padding: 20px;
             background-color: #f5f5f5;
             color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         h1 {
             color: #007ACC;
+            text-align: center;
+            font-weight: 700;
             margin-bottom: 20px;
         }
-        p {
-            font-size: 16px;
-            line-height: 1.5;
-        }
-        .container {
+        .section {
+            width: 80%;
+            max-width: 800px;
             background: #ffffff;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #333;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .section p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        a {
+            color: #007ACC;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Flask Framework Implementation</h1>
-        <p>This web page is created using the Flask framework.</p>
-        <p><strong>Installation Steps:</strong> Flask was installed using pip, and a basic app was created.</p>
-        <p><strong>Difficulties:</strong> Setting up the environment, resolved by configuring a virtual environment.</p>
+    <h1>Lab 10: Hosting with Netlify</h1>
+
+    <div class="section">
+        <h2>Problem 3: Hosting and Viewing My Project Online</h2>
+        <p>
+            In this part of the lab, I set up a website to host my project files using 
+            <a href="https://www.netlify.com" target="_blank">Netlify</a>, a free hosting platform. 
+            I uploaded my files from the <strong>lab10</strong> folder, which included an 
+            <code>index.html</code> file and other resources like images and CSS styles. 
+            After deploying the project, I received a live URL that anyone can use to view my work.
+        </p>
+        <p>
+            The purpose of this task was to learn how to make a website publicly accessible and ensure 
+            everything looks and works as intended. This included testing that all links, images, and styles 
+            display correctly when accessed through the browser. Hosting the project online allows others to see it 
+            from anywhere, making it easy to share and showcase.
+        </p>
+        <p>
+            You can view the hosted project here: 
+            <a href="https://your-site-name.netlify.app" target="_blank">https://your-site-name.netlify.app</a>
+        </p>
     </div>
 </body>
 </html>
