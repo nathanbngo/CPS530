@@ -1,0 +1,214 @@
+<!-- Lab 05 Nathan Ngo 501090210 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 05 - JavaScript and jQuery</title>
+    
+    <!-- close icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(56, 56, 56, 0.150);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            color: #2b2b52;
+            text-align: center;
+        }
+        h3 {
+            text-align: center;
+            color: #555;
+            font-weight: normal;
+        }
+        .problem {
+            margin-top: 20px;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+        }
+        label, input, textarea, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            width: auto;
+            background-color: #2b2b52;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+        .char-count, .letter-count {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #555;
+            display: inline;
+        }
+        .image-container {
+            text-align: center;
+        }
+        #image {
+            width: 200px;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        #fullpage {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgba(48, 48, 48, 0.9);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 48;
+            color: white;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 48px;
+        }
+
+        /* Infinite color fading animation */
+        @keyframes fadeColor {
+            0% { color: #414174; }
+            50% { color: #02CCFE; }
+            100% { color: #2b2b52; }
+        }
+        .fade-in {
+            animation: fadeColor 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lab 05</h1>
+        <h3>Nathan Ngo | 501090210 | nathan.ngo@torontomu.ca</h3>
+
+        <!-- Problem 1 -->
+        <div class="problem">
+            <h2>Problem 1</h2>
+            <p>Enter name, address, and phone number:</p>
+            <form id="infoForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Last name, First name" required>
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" placeholder="123 Yonge St, Toronto, ON" required>
+
+                <label for="phone">Phone Number format: (123) 456-7890:</label>
+                <input type="text" id="phone" placeholder="(123) 456-7890" required>
+
+                <button type="button" onclick="validateForm()">Validate and Display</button>
+            </form>
+            <div id="display" style="margin-top: 20px; font-size: 1.2em; color: #414174;"></div>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="problem">
+            <h2>Problem 2</h2>
+            <textarea id="textInput" rows="5" placeholder="Type here..." oninput="countCharacters()"></textarea>
+            <p>Total Characters: <span class="char-count" id="charCount">0</span></p>
+            <p>Total Letters: <span class="letter-count" id="letterCount">0</span></p>
+        </div>
+
+        <!-- Problem 3 -->
+        <div class="problem">
+            <h2>Problem 3</h2>
+            <div class="image-container">
+                <p>Click the image below to view it in full-screen:</p>
+                <img src="image.jpg" alt="Toronto" id="image" onclick="openFullScreen(this)">
+            </div>
+        </div>
+    </div>
+
+    <div id="fullpage">
+        <span class="material-symbols-outlined" id="closeButton" onclick="closeFullScreen()">close_fullscreen</span>
+    </div>
+
+    <script
+        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous">
+    </script>
+    <script>
+        // Problem 1
+        function validateForm() {
+            let name = $("#name").val();
+            let address = $("#address").val();
+            let phone = $("#phone").val();
+            let phonePattern = /^\(\d{3}\) \d{3}-\d{4}$/;
+
+            if (!/^[a-zA-Z\s]+$/.test(name)) {
+                alert("Name must contain only letters.");
+                return;
+            }
+            if (address.trim() === "") {
+                alert("Address cannot be empty.");
+                return;
+            }
+            if (!phonePattern.test(phone)) {
+                alert("Phone number must be in the format (123) 456-7890.");
+                return;
+            }
+            
+            let formattedPhone = phone.replace(/^\((\d{3})\) (\d{3})-(\d{4})$/, "$1-$2-$3");
+
+            // Add infinite fade-in effect
+            $("#display").html(`<p>Name: ${name}</p><p>Address: ${address}</p><p>Phone: ${formattedPhone}</p>`)
+                         .addClass("fade-in");
+        }
+
+        // Problem 2
+        function countCharacters() {
+            let text = $("#textInput").val();
+            $("#charCount").text(text.length);
+            $("#letterCount").text((text.match(/[a-zA-Z]/g) || []).length);
+        }
+
+        // Problem 3
+        function openFullScreen(img) {
+            const fullPage = document.getElementById('fullpage');
+            fullPage.style.backgroundImage = `url(${img.src})`;
+            fullPage.style.display = 'block';
+        }
+
+        function closeFullScreen() {
+            const fullPage = document.getElementById('fullpage');
+            fullPage.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

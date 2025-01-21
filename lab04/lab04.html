@@ -1,0 +1,233 @@
+<!-- Nathan Ngo 501090210 nathan.ngo@torontomu.ca -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 04</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px; 
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #005f73;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            color: #0a9396;
+            text-align: center;
+        }
+
+        #bookmarkList {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        #bookmarkList li a {
+            text-decoration: none;
+            color: #005f73;
+            font-weight: 600;
+        }
+
+        #bookmarkList li span {
+            font-size: 0.9em;
+            color: #7d8597;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #94d2bd;
+            border: none;
+            padding: 10px 15px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0a9396;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+
+        /* Palindrome Section */
+        #palindromeResult {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        #palindromeResults p {
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .palindrome {
+            color: green;
+        }
+
+        .not-palindrome {
+            color: red;
+        }
+
+        .highlight {
+            background-color: #d9faff;
+            border-left: 5px solid #94d2bd;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Lab 04</h1>
+    <h3>Nathan Ngo | 501090210 | nathan.ngo@torontomu.ca</h3>
+
+    <!-- Problem 1 -->
+    <h2>Favorite Bookmarks</h2>
+    <ul id="bookmarkList"></ul>
+
+    <input type="text" id="bookmarkName" placeholder="Enter bookmark name" />
+    <input type="text" id="bookmarkURL" placeholder="Enter bookmark URL" />
+    <button onclick="addBookmark()">Add Bookmark</button>
+
+    <!-- Problem 2 -->
+    <h2>Palindrome Checker</h2>
+    <p id="palindromeResult" style="font-weight: bold;"></p>
+    <p>Enter a word or phrase to check if it's a palindrome:</p>
+    <input type="text" id="palindromeInput" placeholder="Type here..." />
+    <button onclick="checkPalindrome()">Check</button>
+    <div id="palindromeResults"></div>
+</div>
+
+<script>
+    //Bookmark list array
+    const bookmarks = [
+        { url: 'https://www.google.com', name: 'Google' },
+        { url: 'http://youtube.com', name: 'Youtube' }
+    ];
+
+    function displayBookmarks() {
+        const listElement = document.getElementById('bookmarkList');
+        listElement.innerHTML = '';  // Clear existing content
+
+        bookmarks.forEach((bookmark, index) => {
+            const listItem = document.createElement('li');
+            const isSecure = bookmark.url.startsWith('https');
+            
+            const lockImage = isSecure 
+                ? '<img src="locked.png" alt="Secure" width="16px" />'  //Replace with your green lock image URL
+                : '<img src="unlocked.png" alt="Not Secure" width="16px" />'; //Replace with your red lock image URL
+
+            //Create the HTML to show both the name, URL, and the lock image
+            listItem.innerHTML = `
+                <a href="${bookmark.url}" target="_blank">${bookmark.name}</a> 
+                (<a href="${bookmark.url}" target="_blank"><span>${bookmark.url}</span></a>)
+                ${lockImage}
+                <button onclick="removeBookmark(${index})">Remove</button>
+            `;
+            listElement.appendChild(listItem);
+        });
+    }
+
+
+    //Function to add a new bookmark
+    function addBookmark() {
+        const name = document.getElementById('bookmarkName').value;
+        const url = document.getElementById('bookmarkURL').value;
+
+        if (name === "" || url === "") {
+            alert("Invalid Input");
+            return;
+        }
+
+        bookmarks.push({ name, url });
+        displayBookmarks(); //Refresh the bookmark list
+        document.getElementById('bookmarkName').value = ""; //Clear input fields
+        document.getElementById('bookmarkURL').value = "";
+    }
+
+    //Function to remove a bookmark by index
+    function removeBookmark(index) {
+        bookmarks.splice(index, 1); //Remove the bookmark at the given index
+        displayBookmarks(); //Refresh the bookmark list
+    }
+
+    //Call displayBookmarks on page load
+    displayBookmarks();
+
+    //Palindrome checker functions, converts everything to lowercase, and removes all punctuation
+    //only leaving letters and numbers
+    function cleanString(str) {
+        return str.toLowerCase().replace(/[^a-z0-9]/g, '');
+    }
+
+    //Determine whether the clean string is a palindrome
+    function isPalindrome(str) {
+        const cleaned = cleanString(str);
+        return cleaned === cleaned.split('').reverse().join('');
+    }
+
+    function checkPalindrome() {
+        const input = document.getElementById('palindromeInput').value;
+        const res = document.getElementById('palindromeResult');
+        const resultsElement = document.getElementById('palindromeResults');
+        
+        if (input === "") {
+            alert("Invalid Input");
+            return;
+        }
+
+        const isP = isPalindrome(input);
+        res.textContent = isP ? 'It is a palindrome' : 'It is not a palindrome';
+        res.style.color = isP ? 'green' : 'red'; //Sets color
+
+        //Add the plain string to the results section without the phrase
+        const resultText = input;
+
+        //Create a new paragraph for the result
+        const resultDisplay = document.createElement('p');
+        resultDisplay.textContent = resultText;
+        resultDisplay.style.color = isP ? 'green' : 'red'; //Color input text in the result section
+
+        //Add the new result to the top of the results section
+        resultsElement.prepend(resultDisplay);
+        document.getElementById('palindromeInput').value = ""; //Clear input field after checking
+    }
+
+</script>
+
+</body>
+</html>
