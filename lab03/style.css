@@ -1,0 +1,202 @@
+/* 
+Title: Lab03 
+Name: Nathan Ngo 
+Student #: 501090210 
+Email: nathan.ngo@torontomu.ca  
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+    color: maroon;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    padding: 40px;
+    background-color: beige;
+    transition: background-color 0.5s, color 0.3s;
+}
+
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: maroon;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+    border: 2px solid #e0f2e9;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2em;
+    font-weight: 800;
+    transition: color 0.3s;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 2em;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+h2:hover {
+    color: #b00000;
+}
+
+p {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.image-hover {
+    max-width: 80%; 
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.image-hover:hover {
+    transform: scale(1.05);
+}
+
+.gallery {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gallery img {
+    width: 300px; 
+    height: 200px; 
+    object-fit: cover;
+}
+
+.food-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.food {
+    text-align: center;
+    max-width: 300px;
+}
+
+.food img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.food img:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #34495e;
+    color: white;
+    border-radius: 10px;
+}
+
+.bg-beige {
+    background-color: beige !important;
+}
+
+.text-maroon {
+    color: maroon;
+}
+
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    section {
+        padding: 10px;
+    }
+
+    .food-list {
+        flex-direction: column;
+    }
+
+}
+
+@media (min-width: 601px) and (max-width: 991px) {
+    h1 {
+        font-size: 2.2em;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    .food-list {
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+}
+
+@media (min-width: 992px) {
+    h1 {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    .food-list {
+        justify-content: space-between;
+        flex-direction: row;
+    }
+}

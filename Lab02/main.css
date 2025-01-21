@@ -1,0 +1,176 @@
+/* 
+Title: Lab02 
+Name: Nathan Ngo 
+Student #: 501090210 
+Email: nathan.ngo@torontomu.ca  
+*/
+
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Base Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff;
+}
+
+header, footer {
+    background-color: #77A6F6;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    animation: colorChange 60s infinite alternate;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+/* CSS Combinator: Descendant combinator */
+nav ul li a {
+    color: white; /* Default color */
+}
+
+nav ul li a:hover {
+    color: #FFD700; /* Color on hover */
+    text-decoration: underline; /* Additional effect on hover */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+h2 {
+    color: #00887A;
+    font-weight: 600;
+}
+
+.intro, .highlight {
+    padding: 10px;
+    border: 2px solid #00887A;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.highlight {
+    background-color: #e0f7fa;
+}
+
+.highlight:hover {
+    background-color: #ffeb3b;
+    transition: background-color 0.5s ease;
+}
+
+/* Photos Section */
+#photos {
+    text-align: center;
+}
+
+.photo-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+figure {
+    margin: 10px;
+}
+
+figure img {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    border-radius: 15px;
+    opacity: 0.9;
+}
+
+.img-hover:hover {
+    opacity: 1;
+}
+
+figcaption {
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Experience Section */
+.experience-text {
+    color: #f0f8ff;
+}
+
+.experience-summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+    background-color: #77A6F6;
+    animation: colorChange 60s infinite alternate;
+}
+
+.resume-container {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.resume-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border: 2px solid #00887A;
+    border-radius: 10px;
+}
+
+/* Contact Section */
+.contact {
+    align-items: center;
+    text-align: center;
+}
+
+/* Summary Button */
+summary {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #77A6F6;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+details[open] summary {
+    background-color: #00887A;
+}
+
+/* Elements */
+a::before {
+    content: '✉ ';
+}
+
+p::first-letter {
+    font-size: 1.5em;
+    color: #00887A;
+}
+
+/* Animation */
+@keyframes colorChange {
+    0% { background-color: #77A6F6; }
+    100% { background-color: #00C4B0; }
+}
